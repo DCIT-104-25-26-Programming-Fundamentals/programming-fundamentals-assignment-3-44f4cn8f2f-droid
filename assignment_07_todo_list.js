@@ -79,6 +79,78 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readline = require('readline-sync');
+
+let tasks = [];
+
+function addTask() {
+	const input = readline.question('Enter task: ');
+	if (input.trim() === '') {
+		console.log('No task entered.');
+		return;
+	}
+	tasks.push(input);
+	console.log(`Task added: "${input}"`);
+}
+
+function viewTasks() {
+	if (tasks.length === 0) {
+		console.log('No tasks found.');
+		return;
+	}
+	console.log('Your Tasks:');
+	tasks.forEach((t, i) => {
+		console.log(`${i + 1}. ${t}`);
+	});
+}
+
+function deleteTask() {
+	if (tasks.length === 0) {
+		console.log('No tasks to delete.');
+		return;
+	}
+	viewTasks();
+	const num = readline.questionInt('Enter task number to delete: ', { limitMessage: 'Please enter a valid number.' });
+	if (Number.isNaN(num) || num < 1 || num > tasks.length) {
+		console.log('Invalid task number.');
+		return;
+	}
+	const removed = tasks.splice(num - 1, 1)[0];
+	console.log(`Task "${removed}" has been removed.`);
+}
+
+function showMenu() {
+	console.log('\n============================\n     TO-DO LIST MENU\n============================');
+	console.log('1. Add task');
+	console.log('2. View tasks');
+	console.log('3. Delete task');
+	console.log('4. Quit');
+}
+
+function main() {
+	while (true) {
+		showMenu();
+		const choice = readline.question('Enter your choice (1-4): ');
+		switch (choice.trim()) {
+			case '1':
+				addTask();
+				break;
+			case '2':
+				viewTasks();
+				break;
+			case '3':
+				deleteTask();
+				break;
+			case '4':
+				console.log('Goodbye!');
+				return;
+			default:
+				console.log('Invalid choice. Please enter a number from 1 to 4.');
+		}
+	}
+}
+
+main();
+
 
 
