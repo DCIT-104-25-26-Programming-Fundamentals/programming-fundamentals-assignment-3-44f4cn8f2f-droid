@@ -52,6 +52,66 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readline = require('readline-sync');
+
+// Part A — Print the first N terms
+function printFibonacci(n) {
+	if (!Number.isInteger(n) || n <= 0) {
+		console.log('Error: N must be a positive integer.');
+		return;
+	}
+
+	const terms = [];
+	let a = 0, b = 1;
+	for (let i = 0; i < n; i++) {
+		terms.push(a);
+		const next = a + b;
+		a = b;
+		b = next;
+	}
+
+	console.log('Fibonacci sequence: ' + terms.join(' '));
+}
+
+// Part B — Check if a number belongs to the sequence
+function isFibonacciNumber(x) {
+	if (typeof x !== 'number' || Number.isNaN(x) || !Number.isFinite(x) || x < 0) return false;
+	// Generate Fibonacci numbers until >= x
+	let a = 0, b = 1;
+	if (x === 0) return true;
+	while (a <= x) {
+		if (a === x) return true;
+		const next = a + b;
+		a = b;
+		b = next;
+	}
+	return false;
+}
+
+// ----- Main program -----
+function main() {
+	// Part A
+	const nInput = readline.question('How many terms? ');
+	const n = Number(nInput);
+	printFibonacci(n);
+
+	// Part B
+	const numInput = readline.question('Enter a number to check: ');
+	const num = Number(numInput);
+	if (!Number.isFinite(num) || Number.isNaN(num)) {
+		console.log('Invalid number.');
+		return;
+	}
+
+	if (isFibonacciNumber(num)) {
+		console.log(num + ' is a Fibonacci number.');
+	} else {
+		console.log(num + ' is NOT a Fibonacci number.');
+	}
+}
+
+if (require.main === module) main();
+
+
 
 
