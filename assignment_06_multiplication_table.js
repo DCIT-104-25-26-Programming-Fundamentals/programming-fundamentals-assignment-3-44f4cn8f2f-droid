@@ -57,6 +57,52 @@
 //
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readline = require('readline-sync');
+
+// PART A: Single multiplication table
+function singleTable() {
+  const num = readline.questionInt('Enter a number: ');
+  
+  if (num <= 0 || !Number.isInteger(num)) {
+    console.log('Error: Please enter a positive integer.');
+    return;
+  }
+  
+  console.log(`\nMultiplication Table for ${num}:`);
+  for (let i = 1; i <= 12; i++) {
+    console.log(`${num}  x  ${i}  =  ${num * i}`);
+  }
+}
+
+// PART B: Multiple multiplication tables from 1 to N
+function multipleTables() {
+  const n = readline.questionInt('Enter a number N: ');
+  
+  if (n <= 0 || !Number.isInteger(n)) {
+    console.log('Error: Please enter a positive integer.');
+    return;
+  }
+  
+  for (let num = 1; num <= n; num++) {
+    console.log(`\nMultiplication Table for ${num}:`);
+    for (let i = 1; i <= 12; i++) {
+      console.log(`${num}  x  ${i}  =  ${num * i}`);
+    }
+    if (num < n) {
+      console.log('---------------------------');
+    }
+  }
+}
+
+// Run Part A
+console.log('=== PART A: Single Multiplication Table ===');
+singleTable();
+
+// Uncomment below to run Part B
+console.log('\n=== PART B: Multiple Multiplication Tables ===');
+multipleTables();
+
+
+
 
 
