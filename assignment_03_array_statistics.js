@@ -39,8 +39,58 @@
 // - N must be a positive integer. If the user enters 0 or a negative number,
 //   print an error message and stop.
 //
-// =============================================================================
+// ============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
-// =============================================================================
+const readline = require('readline-sync');
+
+function sumArray(arr) {
+	let s = 0;
+	for (let i = 0; i < arr.length; i++) s += arr[i];
+	return s;
+}
+
+function averageArray(arr) {
+	if (arr.length === 0) return 0;
+	return sumArray(arr) / arr.length;
+}
+
+function maxArray(arr) {
+	if (arr.length === 0) return undefined;
+	let m = arr[0];
+	for (let i = 1; i < arr.length; i++) if (arr[i] > m) m = arr[i];
+	return m;
+}
+
+function minArray(arr) {
+	if (arr.length === 0) return undefined;
+	let m = arr[0];
+	for (let i = 1; i < arr.length; i++) if (arr[i] < m) m = arr[i];
+	return m;
+}
+
+function main() {
+	const nRaw = readline.question('How many numbers? ');
+	const n = parseInt(nRaw, 10);
+	if (isNaN(n) || n <= 0) {
+		console.log('Error: N must be a positive integer.');
+		return;
+	}
+
+	const nums = [];
+	for (let i = 0; i < n; i++) {
+		const input = readline.question(`Enter number ${i + 1}: `);
+		const val = parseFloat(input);
+		nums.push(val);
+	}
+
+	console.log('\nResults:');
+	console.log('Sum:     ' + sumArray(nums));
+	console.log('Average: ' + averageArray(nums));
+	console.log('Maximum: ' + maxArray(nums));
+	console.log('Minimum: ' + minArray(nums));
+}
+
+main();
+
 
 
